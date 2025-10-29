@@ -1,0 +1,30 @@
+# Conventional Commit Template for Earworm
+# ----------------------------------------------------
+# Format:
+# <type>(scope): <short summary>
+# [optional body]
+# [optional footer / issue reference]
+#
+# Types:
+#   feat      – new feature
+#   fix       – bug fix
+#   chore     – maintenance tasks
+#   refactor  – code structure change
+#   style     – formatting only
+#   docs      – documentation updates
+#   test      – adding or updating tests
+#   build     – build system / dependency changes
+#   ci        – CI/CD config changes
+#
+# Example:
+# feat(auth): add Spotify OAuth with token refresh
+# ----------------------------------------------------
+
+<type>(scope): <short summary>
+
+# Detailed description (why & what changed)
+# - Point 1
+# - Point 2
+
+# References (optional)
+# Closes #123
