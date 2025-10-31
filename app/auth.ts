@@ -1,11 +1,9 @@
 import NextAuth from "next-auth";
-import Spotify from "next-auth/providers/spotify";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { prisma } from "@/lib/prisma";
+import authConfig from "@/lib/auth.config";
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
-  providers: [
-    Spotify({
-      clientId: process.env.SPOTIFY_CLIENT_ID,
-      clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-    }),
-  ],
+  adapter: PrismaAdapter(prisma),
+  ...authConfig,
 });
