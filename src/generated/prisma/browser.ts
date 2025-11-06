@@ -27,6 +27,11 @@ export type User = Prisma.UserModel
  */
 export type Account = Prisma.AccountModel
 /**
+ * Model TasteProfile
+ * 
+ */
+export type TasteProfile = Prisma.TasteProfileModel
+/**
  * Model Session
  * 
  */
