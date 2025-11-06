@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 import NextAuth from "next-auth";
 import authConfig from "@/lib/auth.config";
 
-const protectedRoutes = ["/home"];
+const protectedRoutes = ["/app"];
 
 const { auth } = NextAuth(authConfig);
 

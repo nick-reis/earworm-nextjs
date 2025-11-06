@@ -10,7 +10,7 @@ export async function requireSession() {
 }
 
 export const login = async () => {
-  await signIn("spotify", { redirectTo: "/home" });
+  await signIn("spotify", { redirectTo: "/app" });
 };
 
 export const logout = async () => {
