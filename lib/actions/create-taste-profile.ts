@@ -3,12 +3,12 @@
 import { prisma } from "../prisma";
 import { fetchReccoFeatures } from "../recco";
 import { FeatureVector, weightedMean } from "../taste";
-import { requireSession } from "./auth";
+import { requireSession, requireUser } from "./auth";
 
 export async function createTasteProfile() {
-  const session = await requireSession();
+  const { user, session } = await requireUser();
 
-  if (!session?.user?.email) {
+  if (!user?.email) {
     throw new Error("Unauthorized");
   }
   const accessToken = (session as any).accessToken;
@@ -17,15 +17,7 @@ export async function createTasteProfile() {
     throw new Error("Missing Spotify token");
   }
 
-  const user = await prisma.user.findUnique({
-    where: { email: session.user.email },
-    include: { TasteProfile: true },
-  });
   if (!user) throw new Error("Unauthorized");
-
-  if (user.hasTasteProfile) {
-    return user.TasteProfile;
-  }
 
   const spotifyGet = async (url: string) => {
     const res = await fetch(url, {

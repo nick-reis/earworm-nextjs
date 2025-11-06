@@ -1,5 +1,4 @@
-import { requireSession } from "@/lib/actions/auth";
-import { prisma } from "@/lib/prisma";
+import { requireUser } from "@/lib/actions/auth";
 import { redirect } from "next/navigation";
 
 export default async function OnboardingLayout({
@@ -7,16 +6,7 @@ export default async function OnboardingLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await requireSession();
-
-  const user = await prisma.user.findUnique({
-    where: { email: session.user?.email || undefined },
-    select: { hasTasteProfile: true },
-  });
-
-  if (!user) {
-    redirect("/");
-  }
+  const { user } = await requireUser();
 
   if (user.hasTasteProfile) {
     redirect("/app");

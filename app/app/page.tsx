@@ -1,14 +1,11 @@
 "use server";
 import { Button } from "@/components/ui/button";
-import { TextLoader } from "@/components/ui/loader";
-import { logout, requireSession } from "@/lib/actions/auth";
-import { createTasteProfile } from "@/lib/actions/create-taste-profile";
+import { logout, requireUser } from "@/lib/actions/auth";
 import { Github, Settings } from "lucide-react";
 import Image from "next/image";
 
 export default async function Home() {
-  const session = await requireSession();
-  const user = session.user;
+  const { user } = await requireUser();
 
   return (
     <div className=" min-h-screen font-sans bg-background">
@@ -19,7 +16,7 @@ export default async function Home() {
             <h1 className=" font-fredoka font-medium text-3xl">earworm</h1>
           </div>
           <div className="flex items-center gap-2">
-            {session.user?.image ? (
+            {user?.image ? (
               <Image
                 src={user?.image || ""}
                 alt={user?.name || "Avatar"}
